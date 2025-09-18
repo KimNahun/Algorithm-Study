@@ -1,11 +1,6 @@
 import java.util.*;
 import java.io.*;
 public class Main {
-	public static int map[][];
-//	public static boolean visited[][];
-	public static int X[]= {0,0,1,-1};
-	public static int Y[]= {-1,1,0,0};
-	public static ArrayList<Integer>[] graph;
 	public static boolean visited[];
 	public static int parent[];
 	
