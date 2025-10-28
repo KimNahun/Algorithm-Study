@@ -1,7 +1,10 @@
-import Foundation
+//
+//  others.swift
+//  Coding
+//
+//  Created by 김나훈 on 10/28/25.
+//
 
-
-import Foundation
 
 var heap = Heap<Int>()
 
@@ -17,18 +20,18 @@ for _ in 0..<n {
             output.append("0")
         }
     } else {
-        heap.add(x)
+        heap.push(x)
     }
 }
 
 print(output.joined(separator: "\n"))
 
+
 struct Heap<T: Comparable> {
     var node = [T]()
-    
     var compare: (T, T) -> Bool = (<=)
     
-    mutating func add(_ element: T) {
+    mutating func push(_ element: T) {
         var index = node.count
         node.append(element)
         while index > 0, !compare(node[index], node[(index-1)/2]) {
@@ -36,19 +39,18 @@ struct Heap<T: Comparable> {
             index = (index-1)/2
         }
     }
-    
     mutating func pop() -> T? {
         if node.count == 0 { return nil }
-        else if node.count == 1 { return node.removeFirst() }
-        var result = node.first
+        if node.count == 1 { return node.removeFirst() }
+        let result = node.first
         node.swapAt(0, node.count - 1)
         _ = node.popLast()
         var index = 0
         
-
         while index < node.count {
             let left = index*2+1
             let right = left+1
+            
             if right < node.count {
                 if compare(node[left], node[right]), !compare(node[right], node[index]) {
                     node.swapAt(right, index)
@@ -69,9 +71,11 @@ struct Heap<T: Comparable> {
             } else {
                 break
             }
+            
         }
+        
+        
         
         return result
     }
 }
-
